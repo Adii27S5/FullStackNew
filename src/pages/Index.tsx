@@ -1,264 +1,268 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import NavigationHeader from "@/components/NavigationHeader";
 import HeroSection from "@/components/HeroSection";
 import HomestayCard from "@/components/HomestayCard";
 import AttractionCard from "@/components/AttractionCard";
 import StatsSection from "@/components/StatsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import DestinationsSection from "@/components/DestinationsSection";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, MapPin, Star, Home, Sparkles, Globe } from "lucide-react";
+import { ArrowRight, MapPin, Star, Home, Sparkles, Globe, Heart } from "lucide-react";
 
-// Import our generated images
-import japaneseRyokan from "@/assets/japanese-ryokan.jpg";
-import moroccanRiad from "@/assets/moroccan-riad.jpg";
-import machuPicchu from "@/assets/machu-picchu.jpg";
+// India Assets
+import manaliSnow from "@/assets/manali-snow.jpg";
+import jaipurHaveli from "@/assets/jaipur-haveli.jpg";
+import varanasiGhats from "@/assets/varanasi-ghats.jpg";
+import keralaHouseboat from "@/assets/kerala-houseboat.jpg";
+import goaBeach from "@/assets/goa-beach.jpg";
+import munnarTea from "@/assets/munnar-tea.jpg";
 
 const Index = () => {
-  // Sample homestay data
-  const featuredHomestays = [
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && user) {
+      const role = localStorage.getItem('user_role');
+
+      // Hardcoded Admin check
+      if (user.email === "aditya@gmail.com") {
+        navigate("/admin-dashboard");
+        return;
+      }
+
+      if (role) {
+        const rolePaths: Record<string, string> = {
+          tourist: "/tourist-dashboard",
+          host: "/host-dashboard",
+          guide: "/guide-dashboard",
+          admin: "/admin-dashboard"
+        };
+        navigate(rolePaths[role] || "/tourist-dashboard");
+      }
+    }
+  }, [user, loading, navigate]);
+  const featuredStays = [
     {
-      id: "1",
-      image: japaneseRyokan,
-      title: "Traditional Kyoto Ryokan",
-      location: "Kyoto, Japan",
-      rating: 4.9,
-      price: 85,
-      host: "Yamamoto-san",
+      id: "3",
+      image: jaipurHaveli,
+      title: "Heritage Palace Stay",
+      location: "Jaipur, Rajasthan",
+      rating: 4.7,
+      price: 2800,
+      host: "Arjun Shekhawat",
+      guests: 3,
+      amenities: ["Heritage Decor", "Courtyard View", "Folk Music"]
+    },
+    {
+      id: "4",
+      image: goaBeach,
+      title: "Azure Palms Homestay",
+      location: "Anjuna, Goa",
+      rating: 4.6,
+      price: 1800,
+      host: "Joao Fernandes",
       guests: 2,
-      amenities: ["Onsen", "Tatami Room", "Kaiseki Meals", "Zen Garden"]
+      amenities: ["Pool", "Beach Access", "Garden"]
     },
     {
       id: "2",
-      image: moroccanRiad,
-      title: "Marrakech Heritage Riad",
-      location: "Marrakech, Morocco", 
+      image: keralaHouseboat,
+      title: "Luxury Houseboat Stay",
+      location: "Alleppey, Kerala",
       rating: 4.8,
-      price: 55,
-      host: "Fatima Benali",
-      guests: 4,
-      amenities: ["Rooftop Terrace", "Traditional Hammam", "Courtyard", "Cooking Class"]
+      price: 2800,
+      host: "Meera Nair",
+      guests: 2,
+      amenities: ["Sunset Deck", "Traditional Food", "AC Rooms"]
     }
   ];
 
-  // Sample attraction data
-  const nearbyAttractions = [
+  const mustVisits = [
     {
-      image: machuPicchu,
-      title: "Machu Picchu Trail",
-      location: "Sacred Valley, Peru",
-      duration: "Full day",
-      rating: 4.9,
-      category: "Adventure",
-      description: "Trek through the Andes to discover the ancient Incan citadel, a UNESCO World Heritage wonder."
+      id: "ghat",
+      image: varanasiGhats,
+      title: "Evening Prayer Ceremony",
+      location: "Varanasi, UP",
+      duration: "Evening",
+      rating: 5.0,
+      category: "Spiritual",
+      description: "Witness the magnificent spiritual spectacle that illuminates the sacred river every evening."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background selection:bg-secondary/20">
       <NavigationHeader />
       <HeroSection />
       <StatsSection />
       <DestinationsSection />
-      
-      {/* Enhanced Featured Homestays Section */}
-      <section id="homestays" className="py-24 px-4 bg-gradient-to-b from-background to-muted/30">
+
+      {/* Featured Homestays Section */}
+      <section className="py-32 px-4 bg-white dark:bg-card/30 relative">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4">
-              <Sparkles className="w-8 h-8 text-primary mr-3" />
-              <span className="text-primary font-semibold uppercase tracking-wider text-sm">Featured Collection</span>
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-secondary/5 rounded-full">
+              <Sparkles className="w-4 h-4 text-secondary" />
+              <span className="text-secondary font-black uppercase tracking-[0.2em] text-[10px]">Premium Curations</span>
             </div>
-            <h2 className="text-6xl font-display font-bold text-foreground mb-6">
-              Handpicked Homestays
+            <h2 className="text-6xl md:text-8xl font-display font-black tracking-tighter text-foreground leading-[0.85]">
+              Heritage <span className="text-secondary italic">Stays</span>
             </h2>
-            <p className="text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Discover exceptional homestays that offer authentic local experiences, warm hospitality, and unforgettable memories
+            <p className="text-xl text-muted-foreground max-w-xl mx-auto font-medium">
+              Handpicked heritage homestays that tell the story of India's rich architecture and warm hospitality.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
-            {featuredHomestays.map((homestay, index) => (
-              <div key={homestay.id} className="animate-slide-up" style={{ animationDelay: `${index * 150}ms` }}>
-                <Link to={`/homestay/${homestay.id}`}>
-                  <HomestayCard {...homestay} />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {featuredStays.map((stay, index) => (
+              <div key={stay.id} className="animate-slide-up" style={{ animationDelay: `${index * 150}ms` }}>
+                <Link to={`/homestay/${stay.id}`}>
+                  <HomestayCard {...stay} />
                 </Link>
               </div>
             ))}
-            
-            {/* Enhanced Browse More Card */}
-            <div className="animate-slide-up bg-gradient-sunset rounded-3xl p-10 flex flex-col items-center justify-center text-white text-center shadow-premium hover:shadow-glow transition-spring hover:scale-105 relative overflow-hidden" style={{ animationDelay: "300ms" }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-              <div className="relative z-10">
-                <div className="w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center mb-6 backdrop-blur-sm">
-                  <Globe className="w-10 h-10 text-white animate-float" />
-                </div>
-                <h3 className="text-3xl font-display font-bold mb-3">10,000+ Homestays</h3>
-                <p className="mb-8 opacity-90 text-lg leading-relaxed">Discover unique places to stay across 50+ countries worldwide</p>
-                <Link to="/homestays">
-                  <Button variant="glass" size="lg" className="px-8 h-12 font-semibold">
-                    Browse All Homestays
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
+          </div>
+
+          <div className="mt-20 text-center">
+            <Link to="/homestays">
+              <Button size="lg" className="h-16 px-12 rounded-2xl bg-foreground text-background font-black text-lg hover:bg-secondary hover:text-white transition-all shadow-xl group">
+                Explore More Stays
+                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
-      
-      {/* Tourist Attractions Section */}
-      <section id="attractions" className="py-20 px-4 bg-muted/30">
+
+      {/* Local Attractions Section */}
+      <section className="py-32 px-4 bg-muted/30">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Explore Local Attractions
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Uncover hidden gems and must-visit places recommended by local hosts and guides
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {nearbyAttractions.map((attraction, index) => (
-              <AttractionCard key={index} {...attraction} />
-            ))}
-            
-            {/* More attractions placeholder cards */}
-            <div className="bg-card rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-travel">
-              <MapPin className="w-12 h-12 mb-4 text-nature" />
-              <h3 className="text-xl font-semibold mb-2">Adventure Tours</h3>
-              <p className="text-muted-foreground mb-4">Guided outdoor activities</p>
-              <Link to="/attractions">
-                <Button variant="guide">Explore Tours</Button>
-              </Link>
-            </div>
-            
-            <div className="bg-card rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-travel">
-              <Star className="w-12 h-12 mb-4 text-warmth" />
-              <h3 className="text-xl font-semibold mb-2">Local Experiences</h3>
-              <p className="text-muted-foreground mb-4">Authentic cultural activities</p>
-              <Link to="/attractions">
-                <Button variant="guide">Book Experience</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <TestimonialsSection />
-      
-      {/* Enhanced User Roles Section */}
-      <section className="py-24 px-4 bg-gradient-mesh">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-6xl font-display font-bold text-foreground mb-6">
-              Join Our Global Community
-            </h2>
-            <p className="text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Whether you're exploring new cultures, sharing your home, or guiding adventurers, there's a perfect place for you in our community
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-            <div className="text-center p-10 rounded-3xl bg-gradient-card hover:shadow-premium transition-spring hover:-translate-y-2 group border border-trust/20 animate-slide-up">
-              <div className="relative mb-8">
-                <div className="w-20 h-20 bg-gradient-ocean rounded-3xl flex items-center justify-center mx-auto shadow-floating group-hover:shadow-glow transition-spring">
-                  <Users className="w-10 h-10 text-white" />
-                </div>
-                <div className="absolute -inset-4 bg-gradient-ocean opacity-20 rounded-full blur-xl group-hover:opacity-30 transition-smooth" />
-              </div>
-              <h3 className="text-3xl font-display font-bold mb-4 text-foreground">For Adventurers</h3>
-              <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-                Discover authentic homestays and immerse yourself in local cultures for truly transformative travel experiences
+          <div className="grid lg:grid-cols-3 gap-16 items-center">
+            <div className="lg:col-span-1 space-y-8">
+              <h2 className="text-5xl md:text-7xl font-display font-black text-foreground tracking-tighter leading-none">
+                Experience <br />
+                <span className="text-nature italic">India</span>
+              </h2>
+              <p className="text-xl text-muted-foreground font-medium leading-relaxed">
+                From the spiritual ghats of Varanasi to the tea estates of Munnar, discover India through the eyes of locals.
               </p>
-              <Link to="/homestays">
-                <Button variant="booking" size="lg" className="w-full h-12 text-base font-semibold">
-                  Start Your Journey
+              <div className="space-y-4">
+                {[
+                  { icon: Star, text: "Curated by Local Guides" },
+                  { icon: MapPin, text: "Hidden Gems of India" },
+                  { icon: Heart, text: "Authentic Cultural Experiences" }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 font-bold text-foreground/80">
+                    <div className="w-10 h-10 bg-nature/10 rounded-xl flex items-center justify-center">
+                      <item.icon className="w-5 h-5 text-nature" />
+                    </div>
+                    {item.text}
+                  </div>
+                ))}
+              </div>
+              <Link to="/attractions">
+                <Button variant="outline" className="h-14 px-8 rounded-xl border-2 border-nature/20 text-nature font-black hover:bg-nature hover:text-white transition-all">
+                  Browse All Tours
                 </Button>
               </Link>
             </div>
-            
-            <div className="text-center p-10 rounded-3xl bg-gradient-card hover:shadow-premium transition-spring hover:-translate-y-2 group border border-primary/20 animate-slide-up" style={{ animationDelay: "150ms" }}>
-              <div className="relative mb-8">
-                <div className="w-20 h-20 bg-gradient-sunset rounded-3xl flex items-center justify-center mx-auto shadow-floating group-hover:shadow-glow transition-spring">
-                  <Home className="w-10 h-10 text-white" />
+
+            <div className="lg:col-span-2">
+              <div className="grid sm:grid-cols-2 gap-8">
+                {mustVisits.map((attraction, index) => (
+                  <AttractionCard key={index} {...attraction} />
+                ))}
+                <div className="bg-white dark:bg-card/50 rounded-[3rem] p-10 flex flex-col items-center justify-center text-center shadow-soft border border-border/50 group hover:shadow-premium transition-all">
+                  <div className="w-20 h-20 bg-nature/10 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Globe className="w-10 h-10 text-nature" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black mb-4">Tea Estate Walks</h3>
+                  <p className="text-muted-foreground mb-8 font-medium italic">"Walk through emerald blankets of tea plantations..."</p>
+                  <Button variant="ghost" className="text-nature font-black uppercase tracking-widest text-xs">Book Tour →</Button>
                 </div>
-                <div className="absolute -inset-4 bg-gradient-sunset opacity-20 rounded-full blur-xl group-hover:opacity-30 transition-smooth" />
               </div>
-              <h3 className="text-3xl font-display font-bold mb-4 text-foreground">For Hosts</h3>
-              <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-                Open your home and share your culture with travelers seeking authentic, meaningful connections
-              </p>
-              <Button variant="adventure" size="lg" className="w-full h-12 text-base font-semibold">
-                Become a Host
-              </Button>
-            </div>
-            
-            <div className="text-center p-10 rounded-3xl bg-gradient-card hover:shadow-premium transition-spring hover:-translate-y-2 group border border-nature/20 animate-slide-up" style={{ animationDelay: "300ms" }}>
-              <div className="relative mb-8">
-                <div className="w-20 h-20 bg-gradient-nature rounded-3xl flex items-center justify-center mx-auto shadow-floating group-hover:shadow-glow transition-spring">
-                  <MapPin className="w-10 h-10 text-white" />
-                </div>
-                <div className="absolute -inset-4 bg-gradient-nature opacity-20 rounded-full blur-xl group-hover:opacity-30 transition-smooth" />
-              </div>
-              <h3 className="text-3xl font-display font-bold mb-4 text-foreground">For Local Guides</h3>
-              <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-                Share your expertise and reveal the hidden gems that make your destination truly special
-              </p>
-              <Button variant="guide" size="lg" className="w-full h-12 text-base font-semibold">
-                Join as Guide
-              </Button>
             </div>
           </div>
         </div>
       </section>
-      
-      {/* Enhanced Footer */}
-      <footer className="bg-gradient-to-br from-foreground via-foreground to-primary/20 text-white py-20 px-4 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-mesh opacity-10" />
-        
-        <div className="container mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className="w-14 h-14 bg-gradient-sunset rounded-2xl flex items-center justify-center shadow-glow">
-                <Home className="w-8 h-8 text-white" />
+
+      {/* Premium Community Section */}
+      <section className="py-32 px-4 bg-secondary text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
+        <div className="container mx-auto relative z-10 text-center space-y-12">
+          <h2 className="text-5xl md:text-8xl font-display font-black tracking-tighter leading-none mb-10">
+            Be Part of our <br />
+            <span className="text-background italic underline decoration-background/30">Community</span>
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Travel", desc: "Unlock authentic Indian stays", link: "/homestays", icon: MapPin },
+              { title: "Host", desc: "Share your heritage", link: "/become-host", icon: Home },
+              { title: "Guide", desc: "Tell your local story", link: "/contact", icon: Sparkles }
+            ].map((role, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-md p-10 rounded-[3rem] border border-white/20 hover:bg-white/20 transition-all text-center group cursor-pointer">
+                <role.icon className="w-12 h-12 mx-auto mb-6 text-white group-hover:scale-110 transition-transform" />
+                <h3 className="text-3xl font-display font-black mb-2">{role.title}</h3>
+                <p className="text-white/70 font-medium mb-8">{role.desc}</p>
+                <Link to={role.link}>
+                  <Button className="bg-white text-secondary font-black px-8 rounded-xl h-12">Join Now</Button>
+                </Link>
               </div>
-              <span className="text-4xl font-display font-bold">HomestayHub</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-foreground text-background py-24 px-4">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row items-start justify-between gap-12 mb-16">
+            <div className="space-y-6 max-w-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-secondary rounded-2xl flex items-center justify-center">
+                  <Home className="w-7 h-7 text-white" />
+                </div>
+                <span className="text-3xl font-display font-black text-white">TourNest</span>
+              </div>
+              <p className="text-white/60 text-lg font-medium leading-relaxed italic">
+                Connecting the world through the authentic hospitality of India.
+              </p>
             </div>
-            <p className="text-white/80 mb-8 text-xl max-w-2xl mx-auto leading-relaxed">
-              Connecting travelers with authentic homestay experiences and local cultures worldwide
-            </p>
-            
-            {/* Social Proof */}
-            <div className="flex items-center justify-center space-x-8 mb-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-warmth">10K+</div>
-                <div className="text-white/70 text-sm">Homestays</div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
+              <div className="space-y-4">
+                <h5 className="font-black uppercase tracking-widest text-xs text-secondary">Discover</h5>
+                <div className="flex flex-col gap-2 font-bold text-white/70">
+                  <Link to="/homestays" className="hover:text-white transition-colors">Homestays</Link>
+                  <Link to="/attractions" className="hover:text-white transition-colors">Attractions</Link>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-warmth">500K+</div>
-                <div className="text-white/70 text-sm">Travelers</div>
+              <div className="space-y-4">
+                <h5 className="font-black uppercase tracking-widest text-xs text-secondary">Community</h5>
+                <div className="flex flex-col gap-2 font-bold text-white/70">
+                  <Link to="/become-host" className="hover:text-white transition-colors">Become a Host</Link>
+                  <Link to="/contact" className="hover:text-white transition-colors">Join as Guide</Link>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-warmth">50+</div>
-                <div className="text-white/70 text-sm">Countries</div>
+              <div className="space-y-4">
+                <h5 className="font-black uppercase tracking-widest text-xs text-secondary">Support</h5>
+                <div className="flex flex-col gap-2 font-bold text-white/70">
+                  <Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+                  <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                </div>
               </div>
             </div>
           </div>
-          
-          <div className="flex flex-wrap justify-center space-x-8 text-lg mb-8">
-            <a href="#" className="hover:text-warmth transition-smooth hover:scale-105 transform">About Us</a>
-            <a href="#" className="hover:text-warmth transition-smooth hover:scale-105 transform">How It Works</a>
-            <a href="#" className="hover:text-warmth transition-smooth hover:scale-105 transform">Safety</a>
-            <Link to="/contact" className="hover:text-warmth transition-smooth hover:scale-105 transform">Contact</Link>
-            <a href="#" className="hover:text-warmth transition-smooth hover:scale-105 transform">Terms</a>
-            <a href="#" className="hover:text-warmth transition-smooth hover:scale-105 transform">Privacy</a>
-          </div>
-          
-          <div className="text-center text-white/60 text-sm">
-            <p>© 2024 HomestayHub. Made with ❤️ for authentic travel experiences.</p>
+
+          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-white/30 text-xs font-bold uppercase tracking-widest">
+            <p>© 2026 TourNest India. All Rights Reserved.</p>
+            <div className="flex gap-6">
+              <span>Instagram</span>
+              <span>LinkedIn</span>
+              <span>Twitter</span>
+            </div>
           </div>
         </div>
       </footer>

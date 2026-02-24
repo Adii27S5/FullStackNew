@@ -1,9 +1,10 @@
+import { Star, MapPin, Users, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Star, MapPin, Users, Wifi, Car } from "lucide-react";
+import { useState } from "react";
 import { formatPrice } from "@/lib/currency";
 
 interface HomestayCardProps {
+  id: string;
   image: string;
   title: string;
   location: string;
@@ -12,90 +13,80 @@ interface HomestayCardProps {
   host: string;
   guests: number;
   amenities: string[];
-  className?: string;
 }
 
-const HomestayCard = ({
-  image,
-  title,
-  location,
-  rating,
-  price,
-  host,
-  guests,
-  amenities,
-  className = "",
-}: HomestayCardProps) => {
+const HomestayCard = ({ id, image, title, location, rating, price, host, guests, amenities }: HomestayCardProps) => {
+  const [isLiked, setIsLiked] = useState(false);
+
   return (
-    <div className={`bg-gradient-card rounded-3xl shadow-travel hover:shadow-premium transition-spring overflow-hidden group hover:-translate-y-2 hover:scale-[1.02] ${className}`}>
-      {/* Enhanced Image */}
-      <div className="relative overflow-hidden h-56">
-        <img 
-          src={image} 
+    <div className="group bg-white dark:bg-card rounded-[2.5rem] overflow-hidden shadow-soft hover:shadow-premium transition-all duration-500 border border-border/50 flex flex-col h-full">
+      {/* Image Container */}
+      <div className="relative h-72 overflow-hidden">
+        <img
+          src={image}
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-spring"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-smooth" />
-        <div className="absolute top-4 right-4">
-          <Badge className="bg-white/95 text-foreground shadow-soft border-0 backdrop-blur-sm">
-            <Star className="w-4 h-4 mr-1 fill-current text-amber-400" />
-            <span className="font-semibold">{rating}</span>
-          </Badge>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+        {/* Floating Badges */}
+        <div className="absolute top-6 left-6 flex flex-col gap-2">
+          <div className="bg-secondary/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-white shadow-glow">
+            Top Rated
+          </div>
         </div>
-        <div className="absolute top-4 left-4">
-          <Badge className="bg-gradient-premium text-white shadow-soft border-0">
-            Featured
-          </Badge>
+
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setIsLiked(!isLiked);
+          }}
+          className="absolute top-6 right-6 p-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl hover:bg-white/40 transition-all group/btn shadow-soft"
+        >
+          <Heart className={`w-5 h-5 transition-colors ${isLiked ? 'fill-red-500 text-red-500' : 'text-white'}`} />
+        </button>
+
+        <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between pointer-events-none">
+          <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/20">
+            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            <span className="text-white font-black text-xs">{rating}</span>
+          </div>
         </div>
       </div>
-      
-      {/* Enhanced Content */}
-      <div className="p-8">
-        <div className="flex items-start justify-between mb-4">
-          <h3 className="text-xl font-display font-semibold text-card-foreground group-hover:text-primary transition-smooth leading-tight">
-            {title}
-          </h3>
-          <div className="text-right">
-            <div className="flex items-baseline">
-              <span className="text-2xl font-bold text-primary">{formatPrice(price).usd}</span>
-              <span className="text-muted-foreground text-sm ml-1">/night</span>
+
+      {/* Content */}
+      <div className="p-8 flex flex-col flex-1">
+        <div className="flex items-center gap-2 text-secondary font-bold text-[10px] uppercase tracking-widest mb-3">
+          <MapPin className="w-3.5 h-3.5" />
+          {location}
+        </div>
+
+        <h3 className="text-2xl font-display font-black text-foreground mb-4 group-hover:text-secondary transition-colors line-clamp-1">
+          {title}
+        </h3>
+
+        <p className="text-muted-foreground text-sm font-medium mb-6 line-clamp-2 italic">
+          "{amenities.join(' • ')}"
+        </p>
+
+        <div className="mt-auto flex items-center justify-between pt-6 border-t border-border/50">
+          <div className="flex flex-col">
+            <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Per day</span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-display font-black text-secondary">₹{price}</span>
             </div>
-            <div className="text-sm text-muted-foreground/80 font-medium">
-              {formatPrice(price).inr}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <Users className="w-4 h-4" />
+              <span className="text-xs font-bold">{guests}</span>
+            </div>
+            <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all transform group-hover:rotate-45">
+              <ArrowRight className="w-5 h-5" />
             </div>
           </div>
         </div>
-        
-        <div className="flex items-center text-muted-foreground mb-3">
-          <MapPin className="w-4 h-4 mr-1" />
-          <span className="text-sm">{location}</span>
-        </div>
-        
-        <div className="flex items-center text-muted-foreground mb-4">
-          <Users className="w-4 h-4 mr-2" />
-          <span className="text-sm">Hosted by {host} • Up to {guests} guests</span>
-        </div>
-        
-        {/* Amenities */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {amenities.slice(0, 3).map((amenity, index) => (
-            <Badge key={index} variant="outline" className="text-xs">
-              {amenity === 'WiFi' && <Wifi className="w-3 h-3 mr-1" />}
-              {amenity === 'Parking' && <Car className="w-3 h-3 mr-1" />}
-              {amenity}
-            </Badge>
-          ))}
-          {amenities.length > 3 && (
-            <Badge variant="outline" className="text-xs">
-              +{amenities.length - 3} more
-            </Badge>
-          )}
-        </div>
-        
-        <Button variant="booking" className="w-full h-12 text-base font-semibold rounded-xl group">
-          <span className="group-hover:scale-105 transition-transform">View Details & Book</span>
-          <div className="ml-2 group-hover:translate-x-1 transition-transform">→</div>
-        </Button>
       </div>
     </div>
   );

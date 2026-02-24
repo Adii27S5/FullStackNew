@@ -11,10 +11,14 @@ import Homestays from "./pages/Homestays";
 import HomestayDetails from "./pages/HomestayDetails";
 import Attractions from "./pages/Attractions";
 import Favorites from "./pages/Favorites";
-import Auth from "./pages/Auth";
+import SignIn from "./pages/SignIn";
 import BecomeHost from "./pages/BecomeHost";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import TouristDashboard from "./pages/TouristDashboard";
+import HostDashboard from "./pages/HostDashboard";
+import GuideDashboard from "./pages/GuideDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -29,13 +33,20 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/auth" element={<Auth />} />
+                <Route path="/auth" element={<SignIn />} />
                 <Route path="/homestays" element={<Homestays />} />
                 <Route path="/homestay/:id" element={<HomestayDetails />} />
                 <Route path="/attractions" element={<Attractions />} />
                 <Route path="/favorites" element={<Favorites />} />
                 <Route path="/become-host" element={<BecomeHost />} />
                 <Route path="/contact" element={<Contact />} />
+
+                {/* Role-based Dashboards */}
+                <Route path="/tourist-dashboard" element={<TouristDashboard />} />
+                <Route path="/host-dashboard" element={<HostDashboard />} />
+                <Route path="/guide-dashboard" element={<GuideDashboard />} />
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
+
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

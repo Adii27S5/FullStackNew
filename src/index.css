@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Travel & Homestay Design System - Dreamy, wanderlust-inspired */
+/* Premium Indian Tricolor Design System - Saffron, White, Green */
 
 @layer base {
   :root {
-    /* Base colors - cool cream tones */
-    --background: 220 20% 98%;
+    /* Base colors - premium ivory tones */
+    --background: 0 0% 100%;
     --foreground: 220 25% 12%;
 
-    /* Card system - clean and airy */
+    /* Pearl White for cards */
     --card: 0 0% 100%;
     --card-foreground: 220 25% 12%;
 
@@ -18,161 +18,90 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 25% 12%;
 
-    /* Primary - dreamy teal for exploration */
-    --primary: 175 70% 42%;
+    /* Ashoka Blue - Primary for trust and authority */
+    --primary: 226 100% 25%;
+    /* #000080 Ashoka Blue approx */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 165 75% 55%;
+    --primary-glow: 226 100% 40%;
 
-    /* Secondary - soft lavender for magic */
-    --secondary: 270 60% 92%;
-    --secondary-foreground: 270 40% 30%;
+    /* Saffron - Secondary for vibrancy */
+    --secondary: 32 100% 60%;
+    /* #FF9933 Saffron */
+    --secondary-foreground: 0 0% 100%;
 
-    /* Muted tones - misty grays */
-    --muted: 220 20% 94%;
+    /* Emerald Green - For nature and growth */
+    --nature: 125 90% 28%;
+    /* #128807 Green */
+    --nature-foreground: 0 0% 100%;
+
+    /* Muted tones - elegant grays */
+    --muted: 220 20% 96%;
     --muted-foreground: 220 10% 45%;
 
-    /* Accent - sunset rose */
-    --accent: 350 70% 75%;
-    --accent-foreground: 350 40% 25%;
+    /* Accent - Saffron Glow */
+    --accent: 32 100% 90%;
+    --accent-foreground: 32 100% 25%;
 
-    /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders and inputs - subtle */
     --border: 220 15% 90%;
     --input: 220 15% 94%;
-    --ring: 175 70% 42%;
+    --ring: 226 100% 25%;
 
-    /* Custom travel theme tokens - Dreamy palette */
-    --adventure: 350 85% 65%;
-    --adventure-light: 350 90% 75%;
-    --adventure-dark: 350 80% 50%;
-    --trust: 175 70% 42%;
-    --trust-light: 165 75% 55%;
-    --nature: 155 55% 48%;
-    --nature-light: 155 50% 65%;
-    --warmth: 35 85% 70%;
-    --warmth-light: 35 80% 82%;
-    --gold: 42 95% 62%;
-    --coral: 16 100% 68%;
-    
-    /* Premium Gradients - Dreamy vibes */
-    --gradient-sunset: linear-gradient(135deg, hsl(350 85% 65%), hsl(35 85% 70%), hsl(42 95% 62%));
-    --gradient-ocean: linear-gradient(135deg, hsl(175 70% 42%), hsl(195 75% 55%), hsl(220 65% 70%));
-    --gradient-hero: linear-gradient(135deg, hsl(270 50% 35% / 0.85), hsl(350 70% 55% / 0.7), hsl(35 85% 60% / 0.5));
-    --gradient-nature: linear-gradient(135deg, hsl(155 55% 48%), hsl(175 60% 52%));
-    --gradient-premium: linear-gradient(135deg, hsl(270 60% 65%), hsl(350 70% 70%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 20% 98%));
-    --gradient-mesh: radial-gradient(ellipse at top left, hsl(350 85% 65% / 0.12), transparent 50%), radial-gradient(ellipse at bottom right, hsl(175 70% 42% / 0.12), transparent 50%);
-    
+    /* Premium Theme Tokens */
+    --saffron: 32 100% 60%;
+    --green: 125 90% 28%;
+    --pearl: 0 0% 100%;
+    --navy: 226 100% 25%;
+
+    /* Gradations for tricolor theme */
+    --gradient-tricolor: linear-gradient(135deg, hsl(32 100% 60%), hsl(0 0% 100%), hsl(125 90% 28%));
+    --gradient-premium: linear-gradient(135deg, hsl(226 100% 25%), hsl(226 80% 45%));
+    --gradient-saffron: linear-gradient(135deg, hsl(32 100% 60%), hsl(32 100% 75%));
+    --gradient-green: linear-gradient(135deg, hsl(125 90% 28%), hsl(125 70% 45%));
+
     /* Advanced Shadows */
-    --shadow-soft: 0 4px 20px hsl(350 85% 65% / 0.12);
-    --shadow-warm: 0 8px 30px hsl(35 85% 70% / 0.25);
-    --shadow-card: 0 2px 10px hsl(220 25% 12% / 0.06);
-    --shadow-premium: 0 20px 60px hsl(270 60% 50% / 0.18);
-    --shadow-floating: 0 10px 40px hsl(175 70% 42% / 0.15);
-    --shadow-glow: 0 0 40px hsl(350 85% 65% / 0.35);
-    --shadow-inner: inset 0 2px 4px hsl(0 0% 0% / 0.05);
+    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.05);
+    --shadow-premium: 0 20px 60px hsl(226 100% 20% / 0.1);
+    --shadow-saffron: 0 10px 30px hsl(32 100% 60% / 0.2);
+    --shadow-glow: 0 0 40px hsl(226 100% 25% / 0.25);
 
-    /* Enhanced Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    --transition-elastic: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
-    /* Glass morphism */
-    --glass-bg: hsl(0 0% 100% / 0.12);
-    --glass-border: hsl(0 0% 100% / 0.25);
-    --glass-shadow: 0 8px 32px hsl(0 0% 0% / 0.12);
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 1.5rem;
   }
 
   .dark {
-    /* Dark theme - mystical night mode */
-    --background: 240 20% 8%;
-    --foreground: 220 20% 96%;
+    /* Dark theme - Charcoal and Deep Navy */
+    --background: 226 50% 5%;
+    --foreground: 0 0% 98%;
 
-    --card: 240 18% 12%;
-    --card-foreground: 220 20% 96%;
+    --card: 226 40% 10%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 240 18% 12%;
-    --popover-foreground: 220 20% 96%;
+    --popover: 226 40% 10%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 175 70% 50%;
+    --primary: 32 100% 60%;
+    /* Saffron pop in dark */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 165 75% 60%;
 
-    --secondary: 270 40% 25%;
-    --secondary-foreground: 270 60% 90%;
+    --secondary: 125 80% 35%;
+    /* Green accent */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 18% 18%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 226 30% 15%;
+    --muted-foreground: 226 10% 65%;
 
-    --accent: 350 60% 50%;
-    --accent-foreground: 350 80% 95%;
+    --accent: 226 100% 25%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --border: 226 20% 20%;
+    --input: 226 20% 18%;
+    --ring: 32 100% 60%;
 
-    --border: 240 15% 22%;
-    --input: 240 15% 20%;
-    --ring: 175 70% 50%;
-    
-    /* Dark mode custom tokens */
-    --adventure: 350 85% 60%;
-    --adventure-light: 350 90% 70%;
-    --trust: 175 70% 50%;
-    --trust-light: 165 75% 60%;
-    --nature: 155 55% 50%;
-    --warmth: 35 80% 55%;
-    --gold: 42 95% 58%;
-    --coral: 16 100% 65%;
-
-    /* Dark mode gradients */
-    --gradient-sunset: linear-gradient(135deg, hsl(350 85% 55%), hsl(35 80% 55%), hsl(42 90% 55%));
-    --gradient-ocean: linear-gradient(135deg, hsl(175 70% 40%), hsl(195 70% 50%), hsl(220 60% 60%));
-    --gradient-hero: linear-gradient(135deg, hsl(270 45% 25% / 0.9), hsl(350 65% 45% / 0.8), hsl(35 80% 50% / 0.6));
-    --gradient-nature: linear-gradient(135deg, hsl(155 50% 40%), hsl(175 55% 45%));
-    --gradient-premium: linear-gradient(135deg, hsl(270 55% 55%), hsl(350 65% 60%));
-    --gradient-card: linear-gradient(145deg, hsl(240 18% 12%), hsl(240 18% 16%));
-    --gradient-mesh: radial-gradient(ellipse at top left, hsl(350 80% 55% / 0.18), transparent 50%), radial-gradient(ellipse at bottom right, hsl(175 65% 45% / 0.18), transparent 50%);
-    
-    /* Dark mode shadows */
-    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.45);
-    --shadow-warm: 0 8px 30px hsl(350 80% 50% / 0.35);
-    --shadow-premium: 0 20px 60px hsl(0 0% 0% / 0.55);
-    --shadow-glow: 0 0 40px hsl(350 80% 55% / 0.45);
-    
-    /* Glass morphism dark */
-    --glass-bg: hsl(240 18% 20% / 0.15);
-    --glass-border: hsl(220 20% 35% / 0.25);
-
-    --sidebar-background: 25 15% 10%;
-    --sidebar-foreground: 35 20% 90%;
-    --sidebar-primary: 14 88% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 25 15% 18%;
-    --sidebar-accent-foreground: 35 20% 90%;
-    --sidebar-border: 25 15% 22%;
-    --sidebar-ring: 14 88% 60%;
+    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.5);
+    --shadow-premium: 0 20px 60px hsl(0 0% 0% / 0.7);
+    --shadow-glow: 0 0 40px hsl(32 100% 60% / 0.3);
   }
 }
 
@@ -182,6 +111,25 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+/* Custom Utilities for Tricolor Theme */
+@layer utilities {
+  .btn-saffron {
+    @apply bg-gradient-to-r from-[hsl(var(--saffron))] to-[hsl(32, 100%, 70%)] text-white shadow-saffron hover:scale-105 transition-all;
+  }
+
+  .btn-green {
+    @apply bg-gradient-to-r from-[hsl(var(--green))] to-[hsl(125, 70%, 40%)] text-white shadow-soft hover:scale-105 transition-all;
+  }
+
+  .glass-pearl {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-premium;
+  }
+
+  .text-gradient-saffron {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--saffron))] to-[hsl(32, 100%, 75%)];
   }
 }

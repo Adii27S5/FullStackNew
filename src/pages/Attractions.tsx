@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import NavigationHeader from '@/components/NavigationHeader';
 import AttractionCard from '@/components/AttractionCard';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Search } from 'lucide-react';
-import templeAttraction from '@/assets/temple-attraction.jpg';
-import mountainVillage from '@/assets/mountain-village.jpg';
+import { Button } from '@/components/ui/button';
+import { Search, Compass, MapPin, Sparkles } from 'lucide-react';
+
+// Indian Assets
+import jaipurHaveli from '@/assets/jaipur-haveli.jpg';
+import manaliSnow from '@/assets/manali-snow.jpg';
+import varanasiGhats from '@/assets/varanasi-ghats.jpg';
+import keralaHouseboat from '@/assets/kerala-houseboat.jpg';
 
 const Attractions = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,113 +18,111 @@ const Attractions = () => {
   const attractions = [
     {
       id: '1',
-      image: templeAttraction,
-      title: 'Sacred Temple Complex',
-      location: 'Ancient City Center',
-      duration: '2-3 hours',
-      rating: 4.7,
+      image: varanasiGhats,
+      title: 'Prayer Ceremony',
+      location: 'Dashashwamedh Ghat, Varanasi',
+      duration: '1-2 hours',
+      rating: 4.9,
       category: 'Cultural',
-      description: 'Experience the spiritual heart of the city with centuries-old architecture.'
+      description: 'Experience the spectacular spiritual ceremony at sunset on the banks of the Ganges.'
     },
     {
       id: '2',
-      image: mountainVillage,
-      title: 'Mountain Hiking Trail',
-      location: 'National Park',
-      duration: '4-5 hours',
-      rating: 4.9,
+      image: manaliSnow,
+      title: 'Snow Valley Adventure',
+      location: 'Manali, Himachal Pradesh',
+      duration: '5-6 hours',
+      rating: 4.8,
       category: 'Adventure',
-      description: 'Challenging trek with breathtaking panoramic views.'
+      description: 'Experience paragliding, zorbing, and skiing in the majestic snowy landscapes.'
     },
     {
       id: '3',
-      image: templeAttraction,
-      title: 'Traditional Market',
-      location: 'Downtown',
-      duration: '1-2 hours',
-      rating: 4.5,
-      category: 'Cultural',
-      description: 'Vibrant local market with authentic street food and crafts.'
+      image: jaipurHaveli,
+      title: 'Fort Exploration',
+      location: 'Amer, Jaipur',
+      duration: '3-4 hours',
+      rating: 4.8,
+      category: 'Heritage',
+      description: 'Explore grand architecture, ornate rooms, and panoramic views from the historic fort.'
     },
     {
       id: '4',
-      image: mountainVillage,
-      title: 'Waterfall Adventure',
-      location: 'Forest Reserve',
-      duration: '3-4 hours',
-      rating: 4.8,
+      image: keralaHouseboat,
+      title: 'Boat Safari',
+      location: 'Alleppey, Kerala',
+      duration: 'Half day',
+      rating: 4.9,
       category: 'Nature',
-      description: 'Hidden waterfall perfect for swimming and photography.'
+      description: 'Glide through tranquil canals and lagoons, experiencing the unique backwater lifestyle.'
     }
   ];
 
-  const categories = ['all', 'Cultural', 'Adventure', 'Nature', 'Food'];
+  const categories = ['all', 'Cultural', 'Adventure', 'Nature', 'Heritage', 'Food'];
 
   const filteredAttractions = attractions.filter(attraction => {
     const matchesSearch = attraction.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         attraction.location.toLowerCase().includes(searchQuery.toLowerCase());
+      attraction.location.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || attraction.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-muted/30 selection:bg-secondary/20 font-sans">
       <NavigationHeader />
-      
-      <main className="pt-24 pb-16 px-4">
-        <div className="container mx-auto">
-          <div className="mb-12">
-            <h1 className="text-5xl font-display font-bold mb-4">Explore Local Attractions</h1>
-            <p className="text-xl text-muted-foreground">Discover the best places to visit recommended by locals</p>
+
+      <main className="pt-32 pb-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center space-y-6 mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-nature/10 text-nature rounded-full text-[10px] font-black uppercase tracking-[0.2em] border border-nature/20">
+              <Compass className="w-4 h-4" />
+              <span>Curated Experiences</span>
+            </div>
+            <h1 className="text-6xl md:text-8xl font-display font-black tracking-tighter leading-[0.9]">The Soul of <span className="text-secondary italic underline decoration-secondary/30">India.</span></h1>
+            <p className="text-xl text-muted-foreground font-medium italic max-w-2xl mx-auto">"Every corner of India is a temple of culture, waiting to be rediscovered by those who seek the extraordinary."</p>
           </div>
 
-          {/* Search */}
-          <div className="bg-card rounded-2xl shadow-travel p-6 mb-8">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
+          <div className="max-w-5xl mx-auto mb-20 space-y-12">
+            <div className="relative group">
+              <Search className="absolute left-8 top-1/2 -translate-y-1/2 text-secondary w-6 h-6 group-focus-within:scale-110 transition-transform" />
               <Input
-                type="text"
-                placeholder="Search attractions..."
+                placeholder="Find heritage walks, food tours, or spiritual ceremonies..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-12"
+                className="h-20 pl-18 pr-10 rounded-[2.5rem] bg-white dark:bg-card border-0 shadow-premium outline-none text-xl font-bold placeholder:text-muted-foreground/50 transition-all"
               />
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              {categories.map(category => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-10 py-4 rounded-2xl text-[10px] uppercase font-black tracking-widest transition-all ${selectedCategory === category
+                      ? 'bg-secondary text-white shadow-glow'
+                      : 'bg-white dark:bg-card text-muted-foreground hover:bg-secondary/5 hover:text-secondary border border-border/50'
+                    }`}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Categories */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {categories.map((category) => (
-              <Badge
-                key={category}
-                variant={selectedCategory === category ? 'default' : 'outline'}
-                className="px-4 py-2 cursor-pointer"
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </Badge>
-            ))}
-          </div>
-
-          {/* Results */}
-          <div className="mb-6">
-            <p className="text-muted-foreground">
-              {filteredAttractions.length} attractions found
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
             {filteredAttractions.map((attraction) => (
               <AttractionCard key={attraction.id} {...attraction} />
             ))}
           </div>
 
           {filteredAttractions.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-xl text-muted-foreground">No attractions found</p>
-              <Button onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }} className="mt-4">
-                Clear Filters
-              </Button>
+            <div className="text-center py-32 bg-white dark:bg-card rounded-[4rem] shadow-soft border border-border/50 max-w-4xl mx-auto">
+              <div className="w-24 h-24 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
+                <MapPin className="w-10 h-10 text-muted-foreground opacity-30" />
+              </div>
+              <h3 className="text-4xl font-display font-black mb-4">No results found</h3>
+              <p className="text-lg text-muted-foreground italic font-medium">Try a different search term or explore spiritual ceremonies.</p>
+              <Button onClick={() => { setSearchQuery(''); setSelectedCategory('all') }} variant="ghost" className="mt-8 text-secondary font-black uppercase tracking-widest text-[10px]">Clear all filters</Button>
             </div>
           )}
         </div>

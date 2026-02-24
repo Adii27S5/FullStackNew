@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Clock, MapPin, Camera, Star } from "lucide-react";
+import { Star, MapPin, Clock } from "lucide-react";
 
 interface AttractionCardProps {
   image: string;
@@ -9,8 +8,8 @@ interface AttractionCardProps {
   duration: string;
   rating: number;
   category: string;
-  description: string;
   className?: string;
+  description?: string;
 }
 
 const AttractionCard = ({
@@ -20,60 +19,62 @@ const AttractionCard = ({
   duration,
   rating,
   category,
-  description,
   className = "",
+  description = ""
 }: AttractionCardProps) => {
   return (
-    <div className={`bg-card rounded-2xl shadow-travel hover:shadow-warm transition-smooth overflow-hidden group ${className}`}>
-      {/* Image */}
-      <div className="relative overflow-hidden h-48">
-        <img 
-          src={image} 
+    <div className={`bg-white dark:bg-card rounded-[2.5rem] shadow-soft hover:shadow-premium transition-all duration-500 overflow-hidden group hover:-translate-y-2 border border-border/50 flex flex-col h-full ${className}`}>
+      {/* Image Section */}
+      <div className="relative overflow-hidden h-60">
+        <img
+          src={image}
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-smooth"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+
         <div className="absolute top-4 left-4">
-          <Badge className="bg-nature text-white">
+          <Badge className="bg-nature text-white shadow-glow border-0 font-black uppercase tracking-widest text-[10px] px-3 py-1">
             {category}
           </Badge>
         </div>
-        <div className="absolute top-4 right-4">
-          <Badge variant="secondary" className="bg-white/90 text-foreground">
-            <Star className="w-3 h-3 mr-1 fill-current text-yellow-500" />
-            {rating}
-          </Badge>
+
+        <div className="absolute bottom-4 left-4 right-4">
+          <div className="flex items-center justify-between text-white">
+            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+              <Star className="w-3.5 h-3.5 fill-gold text-gold" />
+              <span className="text-sm font-bold">{rating}</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+              <Clock className="w-3.5 h-3.5" />
+              <span className="text-xs font-bold uppercase tracking-widest">{duration}</span>
+            </div>
+          </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-smooth" />
       </div>
-      
-      {/* Content */}
-      <div className="p-6">
-        <h3 className="text-lg font-semibold text-card-foreground mb-2 group-hover:text-primary transition-smooth">
-          {title}
-        </h3>
-        
-        <div className="flex items-center text-muted-foreground mb-2">
-          <MapPin className="w-4 h-4 mr-1" />
-          <span className="text-sm">{location}</span>
+
+      {/* Content Section */}
+      <div className="p-8 flex flex-col flex-1 space-y-4">
+        <div className="space-y-2">
+          <div className="flex items-center text-nature font-bold text-[10px] uppercase tracking-widest">
+            <MapPin className="w-3 h-3 mr-1" />
+            {location}
+          </div>
+          <h3 className="text-2xl font-display font-black text-foreground group-hover:text-primary transition-colors leading-tight">
+            {title}
+          </h3>
         </div>
-        
-        <div className="flex items-center text-muted-foreground mb-4">
-          <Clock className="w-4 h-4 mr-1" />
-          <span className="text-sm">{duration}</span>
-        </div>
-        
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-          {description}
-        </p>
-        
-        <div className="flex gap-2">
-          <Button variant="guide" className="flex-1">
-            <MapPin className="w-4 h-4 mr-2" />
-            Get Directions
-          </Button>
-          <Button variant="outline" size="icon">
-            <Camera className="w-4 h-4" />
-          </Button>
+
+        {description && (
+          <p className="text-muted-foreground text-sm line-clamp-3 italic leading-relaxed font-medium">
+            "{description}"
+          </p>
+        )}
+
+        <div className="pt-6 mt-auto border-t border-border/50">
+          <button className="text-xs font-black uppercase tracking-[0.2em] text-primary hover:text-primary-foreground group-hover:scale-105 transition-all text-left">
+            Experience India →
+          </button>
         </div>
       </div>
     </div>

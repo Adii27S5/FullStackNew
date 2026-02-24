@@ -1,65 +1,70 @@
-import { Users, Home, MapPin, Star } from "lucide-react";
+import { Users, Home, MapPin, Star, IndianRupee, Heart } from "lucide-react";
 
 const StatsSection = () => {
   const stats = [
     {
       icon: Home,
-      number: "10,000+",
-      label: "Verified Homestays",
-      description: "Across 50+ countries"
+      number: "5,000+",
+      label: "Verified Hosts",
+      description: "Across 28 Indian States",
+      color: "from-primary to-primary/60"
     },
     {
       icon: Users,
-      number: "500K+",
-      label: "Happy Travelers",
-      description: "Authentic experiences"
+      number: "1 Lakh+",
+      label: "Happy Explorers",
+      description: "Discovering India",
+      color: "from-nature to-nature/60"
     },
     {
       icon: Star,
       number: "4.9/5",
-      label: "Average Rating",
-      description: "From our community"
+      label: "Heritage Rating",
+      description: "Community Approved",
+      color: "from-gold to-amber-500"
     },
     {
-      icon: MapPin,
-      number: "2,000+",
-      label: "Local Guides",
-      description: "Expert recommendations"
+      icon: Heart,
+      number: "100%",
+      label: "Selected Love",
+      description: "Local, Pure, Authentic",
+      color: "from-rose-500 to-rose-300"
     }
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-mesh">
+    <section className="py-32 px-4 bg-muted/10 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-display font-bold text-foreground mb-4">
-            Trusted by Travelers Worldwide
+        <div className="text-center mb-20 space-y-4">
+          <h2 className="text-5xl md:text-7xl font-display font-black text-foreground tracking-tighter leading-none">
+            Selected for <span className="text-primary italic">You.</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join our global community of adventurers discovering authentic local experiences
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
+            We're building the most authentic community of Indian hosts and travelers, sharing stories one home at a time.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <div 
+            <div
               key={index}
-              className="text-center group animate-slide-up"
+              className="text-center group animate-slide-up bg-white dark:bg-card/50 p-10 rounded-[3rem] shadow-soft hover:shadow-premium transition-all hover:-translate-y-2 border border-border/50"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="relative mb-6">
-                <div className="w-20 h-20 bg-gradient-sunset rounded-2xl flex items-center justify-center mx-auto shadow-premium group-hover:shadow-glow transition-spring group-hover:scale-110">
+              <div className="relative mb-8">
+                <div className={`w-20 h-20 bg-gradient-to-br ${stat.color} rounded-[2rem] flex items-center justify-center mx-auto shadow-glow group-hover:scale-110 transition-transform`}>
                   <stat.icon className="w-10 h-10 text-white" />
                 </div>
-                <div className="absolute -inset-4 bg-gradient-sunset opacity-20 rounded-full blur-xl group-hover:opacity-30 transition-smooth" />
               </div>
-              <h3 className="text-4xl font-bold text-foreground mb-2 font-display">
+              <h3 className="text-4xl font-display font-black text-foreground mb-2">
                 {stat.number}
               </h3>
-              <p className="text-lg font-semibold text-primary mb-1">
+              <p className="text-sm font-black uppercase tracking-widest text-primary mb-1">
                 {stat.label}
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-muted-foreground font-bold italic opacity-60">
                 {stat.description}
               </p>
             </div>
